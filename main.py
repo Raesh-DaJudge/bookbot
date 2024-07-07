@@ -5,12 +5,13 @@ def print_report(path):
     text = get_book_text(path)
     print(f"--- Begin report of {path} ---")
     print(count_words(text))
+    print()
 
     chars = count_characters(text)
-    sorted_chars = sorted(chars, key=chars.get, reverse=True)
-    for key in sorted_chars:
-        if key.isalpha():
-            print(f"The '{key}' character was found {chars[key]} times")
+    sorted_chars = chars_dict_to_sorted_list(chars)
+    for item in sorted_chars:
+        if item["char"].isalpha():
+            print(f"The '{item['char']}' character was found {item['num']} times")
 
     print("--- End report ---")
 
@@ -32,5 +33,17 @@ def count_characters(str):
             chars[char] = 1
     
     return chars
+
+
+def sort_on(d):
+    return d["num"]
+
+
+def chars_dict_to_sorted_list(num_chars_dict):
+    sorted_list = []
+    for ch in num_chars_dict:
+        sorted_list.append({"char": ch, "num": num_chars_dict[ch]})
+    sorted_list.sort(reverse=True, key=sort_on)
+    return sorted_list
 
 main()
