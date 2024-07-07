@@ -1,7 +1,8 @@
 def main():
     with open("books/frankenstein.txt") as f:
         content = f.read()
-        print(content)
+        words = len(content.split())
+        print(words)
 
 
 
